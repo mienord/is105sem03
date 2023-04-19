@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-    kryptertRune := mycrypt.Krypter([]rune("Kjevik;SN39040;18.03.2022 01:50;6"), mycrypt.ALF_SEM03, 4)
+    kryptertRune := mycrypt.Krypter([]rune("ping"), mycrypt.ALF_SEM03, 4)
     kryptertString := string(kryptertRune)
     fmt.Println(kryptertString)
   
