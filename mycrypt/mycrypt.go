@@ -2,30 +2,24 @@ package mycrypt
 
 var ALF_SEM03 []rune = []rune("abcdefghijklmnopqrstuvwxyzæøå0123456789.,:; ")
 
+// Krypter funksjon
 func Krypter(melding []rune, alphabet []rune, chiffer int) []rune {
-	kryptertMelding := make([]rune, len(melding))
-	for i := 0; i < len(melding); i++ {
-		indeks := sokIAlfabetet(melding[i], alphabet)
-		if indeks+chiffer >= len(alphabet) {
-			kryptertMelding[i] = alphabet[indeks+chiffer-len(alphabet)]
-		} else {
-			kryptertMelding[i] = alphabet[indeks+chiffer]
-		}
-	}
-	return kryptertMelding
+    kryptertMelding := make([]rune, len(melding))
+    for i := 0; i < len(melding); i++ {
+        indeks := sokIAlfabetet(melding[i], alphabet)
+        kryptertMelding[i] = alphabet[(indeks+chiffer)%len(alphabet)]
+    }
+    return kryptertMelding
 }
 
+// DeKrypter funksjon
 func DeKrypter(kryptertMelding []rune, alphabet []rune, chiffer int) []rune {
-	melding := make([]rune, len(kryptertMelding))
-	for i := 0; i < len(kryptertMelding); i++ {
-		indeks := sokIAlfabetet(kryptertMelding[i], alphabet)
-		if indeks-chiffer < 0 {
-			melding[i] = alphabet[indeks-chiffer+len(alphabet)]
-		} else {
-			melding[i] = alphabet[indeks-chiffer]
-		}
-	}
-	return melding
+    melding := make([]rune, len(kryptertMelding))
+    for i := 0; i < len(kryptertMelding); i++ {
+        indeks := sokIAlfabetet(kryptertMelding[i], alphabet)
+        melding[i] = alphabet[(indeks+(len(alphabet)-chiffer))%len(alphabet)]
+    }
+    return melding
 }
 
 func sokIAlfabetet(symbol rune, alfabet []rune) int {
